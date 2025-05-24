@@ -1,0 +1,22 @@
+#userTableContainer {
+    width: 80%;
+    background-color: #f2f2f2;
+    border-radius: 8px;
+    overflow-y: auto;
+}
+
+    #userTableContainer table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    #userTableContainer th,
+    #userTableContainer td {
+        padding: 8px;
+        text-align: left;
+    }
+
+        #userTableContainer th:first-child,
+        #userTableContainer td:first-child {
+            border-left: none;
+        }

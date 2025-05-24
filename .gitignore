@@ -1,0 +1,29 @@
+# Logs
+*.log
+cromwell.web/logs
+cromwell.web/npm-debug.log*
+cromwell.web/yarn-debug.log*
+cromwell.web/yarn-error.log*
+cromwell.web/pnpm-debug.log*
+cromwell.web/lerna-debug.log*
+cromwell.web/dist
+cromwell.web/dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+cromwell.api/node_modules/
+cromwell.web/node_modules/
+
+.vs/
+
+

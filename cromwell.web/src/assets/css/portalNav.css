@@ -1,0 +1,131 @@
+#portalContainer {
+    display: flex;
+    height: 100%
+}
+
+#portalNav {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(to bottom, #FF5100 30%, #f2f2f2 100%);
+    width: 15%;
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
+}
+
+    #portalNav > .siteNavImageContainer {
+        height: 20%;
+    }
+
+        #portalNav > .siteNavImageContainer > img {
+            height: 50%;
+        }
+
+#portalLinks {
+    flex-grow: 1;
+}
+
+#portalButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#portalScreenContainer {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 85%;
+}
+
+#userPanel {
+    background-color: #f2f2f2;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2.5%;
+    gap: 15px;
+    border-radius: 8px;
+}
+
+#portalContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+    #portalContent > div:first-child {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #portalContent > div:last-child {
+        width: 50%;
+        display: flex;
+        height: 90%;
+        justify-content: center;
+    }
+
+.burger {
+    position: fixed;
+    top: 5%;
+    left: 5%;
+    display: none;
+    z-index: 2;
+}
+
+    .burger > img {
+        width: 25%;
+        cursor: pointer;
+    }
+
+@media(max-width: 1120px) {
+    #portalNav {
+        display: none !important;
+        position: fixed;
+        width: 40%;
+    }
+
+    .burger {
+        display: initial;
+    }
+
+    #portalScreenContainer {
+        width: 100%;
+    }
+
+    /* override when forceShow is applied */
+    #portalNav.forceShow {
+        display: flex !important; /* or block, depending on your layout */
+    }
+}
+
+
+@media(max-width: 850px) {
+    #portalNav {
+        width: 100%;
+    }
+
+    #portalContent {
+        flex-direction: column;
+        gap: 15px;
+        justify-content: start;
+        padding-top: 2.5%;
+        padding-bottom: 2.5%;
+    }
+
+        #portalContent > div {
+            width: 95% !important;
+        }
+
+            #portalContent > div:first-child {
+                height: auto !important;
+            }
+}

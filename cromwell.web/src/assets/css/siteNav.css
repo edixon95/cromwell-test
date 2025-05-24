@@ -1,0 +1,38 @@
+#siteLayout {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#siteNav {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 2.5%;
+    background: linear-gradient(to right, #FF5100 0%, #f2f2f2 70%);
+}
+
+#siteContainer {
+    flex-grow: 1;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    background-color: #f2f2f2;
+}
+
+.siteNavMainContent {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.siteNavImageContainer {
+    height: 100%;
+}
+
+    .siteNavImageContainer > img {
+        height: 100%;
+        cursor: pointer;
+    }
+

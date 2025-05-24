@@ -1,0 +1,28 @@
+.buttonBase {
+    min-width: 135px;
+    max-width: 150px;
+    min-height: 35px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.buttonConfirm {
+    background-color: #FF5100;
+    color: #FFF;
+}
+
+.buttonCancel {
+    background-color: #eaeaea;
+}
+
+.buttonClear {
+    background-color: transparent;
+}
+
+.buttonClearW {
+    background-color: transparent;
+    color: #fff
+}

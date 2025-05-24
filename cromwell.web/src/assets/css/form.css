@@ -1,0 +1,39 @@
+.formContainer {
+    width: 80%;
+    background-color: #f2f2f2;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2%;
+    gap: 15px;
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    flex-grow: 1;
+    gap: 15px;
+}
+
+    .inputContainer > div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+.buttonContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.buttonRow {
+    flex-direction: row !important;
+}
+
+.signUpClick {
+    cursor: pointer;
+}

@@ -1,0 +1,11 @@
+.input {
+    min-height: 35px;
+    font-size: 16px;
+    border: 1px solid #FF5100;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+    .input:focus-visible {
+        outline: none;
+    }

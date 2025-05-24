@@ -1,0 +1,62 @@
+.modalBackground {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.2);
+    top: 0;
+    left: 0;
+    width: 100dvw;
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    background-color: #f2f2f2;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 30%;
+}
+
+.modalX {
+    width: 100%;
+    text-align: right;
+}
+
+    .modalX > span {
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+.deleteModal {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+}
+
+    .deleteModal > div {
+        display: flex;
+        gap: 10px;
+    }
+
+.changePasswordModal {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media(max-width: 1120px) {
+    .modal {
+        width: 60%;
+    }
+}
+
+@media(max-width: 850px) {
+    .modal {
+        width: 90%;
+    }
+}

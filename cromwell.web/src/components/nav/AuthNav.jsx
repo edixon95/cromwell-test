@@ -1,0 +1,33 @@
+import Logo from "/assets/images/sah-logo.png";
+import Button from "../shared/Button";
+import { useNavigate } from "react-router-dom";
+
+const SiteNav = () => {
+    const navigate = useNavigate();
+
+    const navigateTo = (page) => {
+        navigate(page);
+    };
+
+    return (
+        <div id="siteNav">
+            <div className="siteNavMainContent">
+                <div className="siteNavImageContainer">
+                    <img src={Logo}
+                        onClick={() => navigateTo("/")}
+                    />
+                </div>
+            </div>
+            <div>
+                <Button
+                    variant={"confirm"}
+                    onClick={() => navigateTo("/")}
+                >
+                    Back to site
+                </Button>
+            </div>
+        </div>
+    )
+};
+
+export default SiteNav;
