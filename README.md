@@ -1,3 +1,5 @@
+... As you can see by the commits, my biggest challenge was this readme.
+
 This project requires node to run
 
 https://nodejs.org/en/download
