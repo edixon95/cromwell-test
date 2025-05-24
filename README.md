@@ -16,8 +16,8 @@ Choose your operating system and follow the on screen instructions if not instal
 	- Open cromwell.api in the terminal
 	- type "npm install"
 	- Once completed, type either "npm start" or "node server.js" 
-	- You should expect two logs - "Database connected" and what port the server is running on (5000)
-		- If you encounter an error, make sure you followed all the points in step 2, and that the mongo connection is running
+	- You should expect two logs  "Database connected" and what port the server is running on (5000)
+	- If you encounter an error, make sure you followed all the points in step 2, and that the mongo connection is running
 
 
 3.5. Setting up the Website (If server is not running locally, or not on port 5000)
