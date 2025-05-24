@@ -1,6 +1,6 @@
 ... As you can see by the commits, my biggest challenge was this readme.
 
-## This is not tested on safari, potential layout issues exist with gap not being support, and possibly some other properties
+## This is not tested on safari, potential layout issues exist with gap not being supported, and possibly some other properties
 
 This project requires node to run
 
