@@ -20,7 +20,8 @@ Choose your operating system and follow the on screen instructions if not instal
 	- If you encounter an error, make sure you followed all the points in step 2, and that the mongo connection is running
 
 
-3.5. Setting up the Website (If server is not running locally, or not on port 5000)
+3.5. Setting up the Website
+	- If server is not running locally, or not on port 5000
 	- Navigate to cromwell.web/src/config/
 	- Open .apiConfig.jsx
 	- Find (near the top) "base_url: "http://localhost:5000", replace "http://localhost:5000" with your server address
