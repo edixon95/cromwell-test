@@ -70,7 +70,7 @@ router.get("/getSingle", authorise, async (request, result) => {
     };
 });
 
-router.delete("/delete", async (req, res) => {
+router.delete("/delete", authorise, async (req, res) => {
     try {
         const { id } = req.query;
 
@@ -88,7 +88,7 @@ router.delete("/delete", async (req, res) => {
     }
 });
 
-router.put("/changePassword", async (req, res) => {
+router.put("/changePassword", authorise, async (req, res) => {
     try {
         const { id, oldPassword, newPassword } = req.body;
 
