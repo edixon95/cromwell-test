@@ -51,7 +51,7 @@ const PasswordForm = (props) => {
                         Cancel
                     </Button>
                     <Button
-                        onClick={() => console.log("a")}
+                        onClick={props.onSubmit}
                     >
                         Change Password
                     </Button>

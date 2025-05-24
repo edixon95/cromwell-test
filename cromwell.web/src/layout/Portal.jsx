@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { Outlet, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutUser, setIsChecking } from "../reducers/userSlice";
+import { logoutUser, setIsChecking, setUser } from "../reducers/userSlice";
 import handleUserCookies from "../util/handleUserCookies";
 import PortalNav from "../components/nav/PortalNav";
 import "../assets/css/portalNav.css";
 import BurgerIcon from "/assets/images/burger-icon.png";
+import getJWT from "../util/getJWT";
+import { getUser } from "../api/user";
 
 const Portal = () => {
     const dispatch = useDispatch();
@@ -14,12 +16,19 @@ const Portal = () => {
     const toggleExpanded = () => setIsExpanded(!isExpanded);
 
     const handleCheckUser = async () => {
-        const isValid = await handleUserCookies();
-        if (!isValid) {
-            dispatch(logoutUser());
-        } else {
-            dispatch(setIsChecking(false));
-        };
+        if (!isLoggedIn) {
+            const isValid = await handleUserCookies();
+            if (!isValid) {
+                dispatch(logoutUser());
+            } else {
+                const userId = getJWT().id;
+                const user = await getUser(userId);
+
+                dispatch(setUser(user));
+            }
+        }
+
+        dispatch(setIsChecking(false));
     };
 
     useEffect(() => {

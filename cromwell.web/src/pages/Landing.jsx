@@ -96,17 +96,24 @@ const Landing = () => {
 
         const isChanged = await changePassword(passwordObject);
 
-        if (isChanged === "Old password does not match the account") {
+        if (isChanged === "Old password does not match the account" || isChanged === "Old password is incorrect") {
             const err = { type: "form", message: isChanged }
             setModalState({
                 ...modalState,
                 errors: [err]
-            })
+            });
         } else if (isChanged) {
             closeModal();
         };
 
     };
+
+    useEffect(() => {
+        setModalState({
+            ...modalState,
+            errors: null
+        });
+    }, [modalState.newPassword, modalState.confirmPassword, modalState.oldPassword]);
 
     return (
         <>
@@ -116,7 +123,7 @@ const Landing = () => {
                         modalState.id ?
                             <div className="deleteModal">
                                 <span>Are you sure you want to delete this user</span>
-                                <div>
+                                <div className="buttonContainer buttonRow">
                                     <Button onClick={closeModal}>
                                         Cancel
                                     </Button>

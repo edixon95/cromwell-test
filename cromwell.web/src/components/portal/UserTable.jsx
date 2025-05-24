@@ -18,9 +18,7 @@ const UserTable = (props) => {
                                 <td>{user.username}</td>
                                 <td>{user.email}</td>
                                 <td>
-                                    {props.selfId !== user._id &&
-                                        <span style={{ cursor: "pointer" }} onClick={() => props.handleDeleteUserClicked(user._id)}>X</span>
-                                    }
+                                    <span style={{ cursor: props.selfId !== user._id ? "pointer" : "not-allowed", color: props.selfId === user._id && "lightgray" }} onClick={() => props.selfId !== user._id && props.handleDeleteUserClicked(user._id)}>X</span>
                                 </td>
                             </tr>
                         ))
