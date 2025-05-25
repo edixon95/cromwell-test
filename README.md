@@ -36,7 +36,7 @@ Choose your operating system and follow the on screen instructions if not instal
 	- type "npm install"
 	- Once completed, type "npm run dev"
 	- You should expect a log of "Local: http://localhost:XXXX/"
-	- Navigate to localhost to see the website
+	- Navigate to localhost (with port) listed to see the website
 
 6. Running tests
 	- Open cromwell.api in the terminal
