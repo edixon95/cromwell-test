@@ -46,6 +46,7 @@ const PasswordForm = (props) => {
                 {parseError(props.errors, "form")}
                 <div className="buttonContainer buttonRow">
                     <Button
+                        variant={"inverse"}
                         onClick={props.cancel}
                     >
                         Cancel

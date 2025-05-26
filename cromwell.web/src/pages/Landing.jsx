@@ -95,7 +95,6 @@ const Landing = () => {
         };
 
         const isChanged = await changePassword(passwordObject);
-
         if (isChanged === "Old password does not match the account" || isChanged === "Old password is incorrect") {
             const err = { type: "form", message: isChanged }
             setModalState({
@@ -124,7 +123,9 @@ const Landing = () => {
                             <div className="deleteModal">
                                 <span>Are you sure you want to delete this user</span>
                                 <div className="buttonContainer buttonRow">
-                                    <Button onClick={closeModal}>
+                                    <Button onClick={closeModal}
+                                        variant={"inverse"}
+                                    >
                                         Cancel
                                     </Button>
                                     <Button onClick={handleDeleteUser}>

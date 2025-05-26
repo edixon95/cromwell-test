@@ -30,4 +30,5 @@
 .buttonInverse {
     border: 2px solid #FF5100;
     color: #FF5100;
+    background-color: transparent;
 }

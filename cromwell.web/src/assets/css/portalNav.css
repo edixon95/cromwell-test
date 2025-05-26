@@ -12,6 +12,7 @@
     width: 15%;
     padding-top: 2.5%;
     padding-bottom: 2.5%;
+    border-right: 2px solid #fff;
 }
 
     #portalNav > .siteNavImageContainer {
@@ -111,6 +112,7 @@
 @media(max-width: 850px) {
     #portalNav {
         width: 100%;
+        border-right: none;
     }
 
     #portalContent {

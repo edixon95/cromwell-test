@@ -1,6 +1,5 @@
 import Button from "../shared/Button";
 
-
 const UserPanel = (props) => {
     return (
         <div id="userPanel">
