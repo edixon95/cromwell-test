@@ -4,7 +4,7 @@ const hasToken = (header) => {
     return header && header.startsWith("Bearer ");
 };
 
-const authorise = (request, result, next) => {
+const checkAuth = (request, result, next) => {
     const header = request.headers?.authorization;
 
     if (!hasToken(header))
@@ -20,4 +20,4 @@ const authorise = (request, result, next) => {
     next();
 }
 
-module.exports = authorise;
+module.exports = checkAuth;
