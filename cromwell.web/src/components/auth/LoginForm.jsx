@@ -15,7 +15,7 @@ const LoginForm = (props) => {
                         onChange={(e) => props.onChange("email", e.target.value)}
                         value={props.formValue.email}
                     />
-                    {parseError(props.errors, "email") }
+                    <span className="formError">{parseError(props.errors, "email")}</span>
                 </div>
 
                 <div>
@@ -26,11 +26,11 @@ const LoginForm = (props) => {
                         value={props.formValue.password}
                         type="password"
                     />
-                    {parseError(props.errors, "password")}
+                    <span className="formError"> {parseError(props.errors, "password")}</span>
                 </div>
             </div>
             <div className="buttonContainer">
-                {parseError(props.errors, "form")}
+                <span className="formError">{parseError(props.errors, "form")}</span>
                 <Button
                 >
                     Login

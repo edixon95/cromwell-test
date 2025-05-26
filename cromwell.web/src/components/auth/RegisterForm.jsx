@@ -30,7 +30,7 @@ const RegisterForm = (props) => {
                         onChange={(e) => props.onChange("username", e.target.value)}
                         value={props.formValue.username}
                     />
-                    <span>{parseError(props.errors, "username")}</span>
+                    <span className="formError">{parseError(props.errors, "username")}</span>
                 </div>
 
                 <div>
@@ -40,7 +40,7 @@ const RegisterForm = (props) => {
                         onChange={(e) => props.onChange("email", e.target.value)}
                         value={props.formValue.email}
                     />
-                    <span>{parseError(props.errors, "email")}</span>
+                    <span className="formError">{parseError(props.errors, "email")}</span>
                 </div>
 
                 <div>
@@ -51,7 +51,7 @@ const RegisterForm = (props) => {
                         value={props.formValue.password}
                         type="password"
                     />
-                    <span>{parseError(props.errors, "password")}</span>
+                    <span className="formError">{parseError(props.errors, "password")}</span>
                 </div>
 
                 <div>
@@ -62,11 +62,11 @@ const RegisterForm = (props) => {
                         value={props.formValue.confirmPassword}
                         type="password"
                     />
-                    <span>{parseError(props.errors, "confirmPassword")}</span>
+                    <span className="formError">{parseError(props.errors, "confirmPassword")}</span>
                 </div>
             </div>
             <div className="buttonContainer">
-                {parseError(props.errors, "form")}
+                <span className="formError">{parseError(props.errors, "form")}</span>
                 <Button
                 >
                     Register

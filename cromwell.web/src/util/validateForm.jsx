@@ -42,7 +42,7 @@ const validateForm = (formObject, isRegister, onlyPass = false) => {
             return invalidInputs;
 
         if (!isValidPassword(formObject.password))
-            invalidInputs.push({ type: "password", message: "Password must contain at least 8 characters, 1 special characer, 1 uppercase character, 1 lowercase character and 1 number" });
+            invalidInputs.push({ type: "password", message: "Must contain at least 8 characters, a special characer, uppercase, lowercase and a number" });
 
         if (invalidInputs.length > 0)
             return invalidInputs;
@@ -77,7 +77,7 @@ const validateForm = (formObject, isRegister, onlyPass = false) => {
             invalidInputs.push({ type: "confirmPassword", message: "Confirm Password must be the same as Password" });
 
         if (!isValidPassword(formObject.newPassword))
-            invalidInputs.push({ type: "newPassword", message: "Password must contain at least 8 characters, 1 special characer, 1 uppercase character, 1 lowercase character and 1 number" });
+            invalidInputs.push({ type: "newPassword", message: "Must contain at least 8 characters, a special characer, uppercase, lowercase and a number" });
 
         if (invalidInputs.length > 0)
             return invalidInputs;

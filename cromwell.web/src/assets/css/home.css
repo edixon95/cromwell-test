@@ -54,18 +54,21 @@
     background: url("/assets/images/sah-tool.png") no-repeat center center;
     width: 100%;
     height: 100%;
+    background-size: cover;
 }
 
 .singleImage {
     background: url("/assets/images/man-working.png") no-repeat center center;
     width: 100%;
     height: 100%;
+    background-size: cover;
 }
 
 .teamImage {
     background: url("/assets/images/sah-group.png") no-repeat center center;
     width: 100%;
     height: 100%;
+    background-size: cover;
 }
 
 .radiusLeft {

@@ -4,7 +4,7 @@ import Card from "../components/shared/Card";
 const Home = () => {
     return (
         <div id="homeContainer">
-            <Card height="80%">
+            <Card height="95%">
                 <div className="informationDiv">
                     <div className="textContainer">
                         <div className="textContent">

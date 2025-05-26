@@ -1,8 +1,6 @@
 const request = require("supertest");
 const app = require("../server");
 const mongoose = require("mongoose");
-const User = require("../models/User");
-const jwt = require("jsonwebtoken");
 
 let token;
 let userId;
@@ -27,6 +25,7 @@ describe("Protected routes", () => {
     protectedRoutes.forEach(({ method, url }) => {
         test(`${method.toUpperCase()} /${url.split("/")[2]} should block unauthorized access`, async () => {
             const res = await request(app)[method](url);
+
             expect(res.statusCode).toBe(401);
             expect(res.body.message).toBe("Unauthorized");
         });
@@ -41,6 +40,7 @@ describe("User Signup", () => {
                 email: "test@example.com",
                 password: "!Password1"
             });
+
         expect(res.status).toBe(200);
     });
 
@@ -51,6 +51,7 @@ describe("User Signup", () => {
                 email: "test@example.com",
                 password: "!Password1"
             });
+
         expect(res.status).toBe(400);
         expect(res.body.message).toBe("Account with this email already exists");
     });
@@ -62,6 +63,7 @@ describe("User Signup", () => {
                 email: "testDIFFERENT@example.com",
                 password: "!Password1"
             });
+
         expect(res.status).toBe(400);
         expect(res.body.message).toBe("Account with this username already exists");
     });
@@ -74,8 +76,9 @@ describe("User Login", () => {
                 email: "testDIFFERENT@example.com",
                 password: "!Password1"
             });
+
         expect(res.status).toBe(404);
-        expect(res.body.message).toBe("Account does not exist");
+        expect(res.body.message).toBe("Account not found");
     });
 
     test("POST /login should require the correct password", async () => {
@@ -84,6 +87,7 @@ describe("User Login", () => {
                 email: "test@example.com",
                 password: "!Password1DIFFERENT"
             });
+
         expect(res.status).toBe(400);
         expect(res.body.message).toBe("Password is incorrect");
     });
@@ -94,6 +98,7 @@ describe("User Login", () => {
                 email: "test@example.com",
                 password: "!Password1"
             });
+
         expect(res.statusCode).toBe(200);
         expect(res.body).toHaveProperty("token");
         expect(res.body).toHaveProperty("user");
@@ -105,18 +110,22 @@ describe("User Login", () => {
 });
 
 describe("User Get", () => {
-    test("GET /getAll should return users", async () => {
+    test("GET /getAll should return an array", async () => {
         const res = await request(app)
             .get("/user/getAll")
             .set("Authorization", `Bearer ${token}`);
+
         expect(res.statusCode).toBe(200);
         expect(Array.isArray(res.body)).toBe(true);
+        expect(res.body[0]).toHaveProperty("_id");
+        expect(res.body[0]).toHaveProperty("username");
     });
 
     test("GET /getSingle should return a user", async () => {
         const res = await request(app)
             .get(`/user/getSingle?id=${userId}`)
             .set("Authorization", `Bearer ${token}`);
+
         expect(res.statusCode).toBe(200);
         expect(res.body).toHaveProperty("_id");
         expect(res.body).toHaveProperty("username");
@@ -133,6 +142,7 @@ describe("Change Password", () => {
                 oldPassword: "",
                 newPassword: ""
             });
+
         expect(res.statusCode).toBe(400);
         expect(res.body.message).toBe("Missing required fields");
     });
@@ -146,6 +156,7 @@ describe("Change Password", () => {
                 oldPassword: "!Password1",
                 newPassword: "!Password2"
             });
+
         expect(res.statusCode).toBe(404);
         expect(res.body.message).toBe("User not found");
     });
@@ -159,6 +170,7 @@ describe("Change Password", () => {
                 oldPassword: "!Password2",
                 newPassword: "!Password2"
             });
+
         expect(res.statusCode).toBe(400);
         expect(res.body.message).toBe("Old password is incorrect");
     });
@@ -172,6 +184,7 @@ describe("Change Password", () => {
                 oldPassword: "!Password1",
                 newPassword: "!Password2"
             });
+
         expect(res.statusCode).toBe(200);
     });
 });
@@ -181,6 +194,7 @@ describe("User Auth", () => {
         const res = await request(app)
             .post("/user/refreshToken")
             .set("Authorization", `Bearer ${token}`)
+
         expect(res.statusCode).toBe(200);
         expect(res.body).toHaveProperty("token");
         expect(res.body.token).not.toBe(token);
@@ -193,6 +207,7 @@ describe("Delete User", () => {
         const res = await request(app)
             .delete(`/user/delete`)
             .set("Authorization", `Bearer ${token}`);
+
         expect(res.statusCode).toBe(400);
         expect(res.body.message).toBe("User ID is required");
     });
@@ -201,6 +216,7 @@ describe("Delete User", () => {
         const res = await request(app)
             .delete(`/user/delete?id=683463aa26e13d61d087ee94`)
             .set("Authorization", `Bearer ${token}`);
+
         expect(res.statusCode).toBe(404);
         expect(res.body.message).toBe("User not found");
     });
@@ -209,6 +225,7 @@ describe("Delete User", () => {
         const res = await request(app)
             .delete(`/user/delete?id=${userId}`)
             .set("Authorization", `Bearer ${token}`);
+
         expect(res.statusCode).toBe(200);
     });
 });
