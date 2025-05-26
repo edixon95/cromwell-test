@@ -42,6 +42,7 @@ const Login = () => {
             return;
         };
 
+        console.log(typeof loginDetails, loginDetails)
         const hasLoggedIn = await login(loginDetails)
 
         if (hasLoggedIn?.message) {

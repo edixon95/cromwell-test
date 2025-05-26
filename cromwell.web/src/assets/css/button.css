@@ -26,3 +26,8 @@
     background-color: transparent;
     color: #fff
 }
+
+.buttonInverse {
+    border: 2px solid #FF5100;
+    color: #FF5100;
+}

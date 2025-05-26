@@ -5,16 +5,16 @@ const hasToken = (header) => {
 };
 
 const authorise = (request, result, next) => {
-    const header = request.headers.authorization;
+    const header = request.headers?.authorization;
 
     if (!hasToken(header))
-        return result.status(401).json({ message: "Token not provided" });
+        return result.status(401).json({ message: "Unauthorized" });
 
     const token = header.split(" ")[1];
     const decoded = isJWTValid(token);
 
     if (!decoded)
-        return result.status(403).json({ message: "Invalid token" });
+        return result.status(401).json({ message: "Unauthorized" });
 
     request.user = decoded;
     next();
