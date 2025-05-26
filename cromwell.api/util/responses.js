@@ -16,10 +16,10 @@ const NotAuthorized = (res) => {
 
 const Success = (res, payload = null) => {
     if (payload)
-        return res.status(200).json(payload)
+        return res.status(200).json(payload);
 
     return res.status(200).json({ message: "Success" });
-}
+};
 
 module.exports = {
     NotFound,
@@ -27,4 +27,4 @@ module.exports = {
     InternalServerError,
     NotAuthorized,
     Success
-}
+};
