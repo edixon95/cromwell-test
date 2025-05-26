@@ -6,7 +6,8 @@ const Button = (props) => {
         confirm: "buttonConfirm",
         cancel: "buttonCancel",
         clear: "buttonClear",
-        clearWhite: "buttonClearW"
+        clearWhite: "buttonClearW",
+        inverse: "buttonInverse"
     };
 
     const variantClass = variantClasses[props?.variant] || variantClasses["confirm"];

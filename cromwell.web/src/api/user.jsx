@@ -71,8 +71,8 @@ const changePassword = async (changePasswordObject) => {
     if (response.status === 200)
         return true;
 
-    if (response.status === 401)
-        return "Old password does not match the account"
+    if (response.result.message === "Old password is incorrect")
+        return response.result.message
 
     return false;
 }

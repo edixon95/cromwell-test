@@ -1,5 +1,5 @@
-... As you can see by the commits, my biggest challenge was this readme.
-This was last updated at 23:32 24/05/2025, I won't touch it anymore. I just noticed a few bugs and a logic issue with the token check
+This had a section about how it was last updated at so and so time and how I was happy. Spoiler: I was not.
+The actual last change I'm doing now is this push, which has the nicer tests and a jwt that makes more sense
 
 ## This is not tested on safari, potential layout issues exist with gap not being supported, and possibly some other properties
 

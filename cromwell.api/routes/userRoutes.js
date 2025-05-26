@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../models/User");
 const authorise = require("../middleware/authorise");
 const createJWT = require("../util/createJWT");
+const mongoose = require("mongoose");
 
 router.post("/register", async (request, result) => {
     try {
@@ -25,10 +26,11 @@ router.post("/register", async (request, result) => {
 router.post("/login", async (request, result) => {
     try {
         const { email, password } = request.body;
+
         const user = await User.findOne({ email }).select("+password");
 
         if (!user)
-            return result.status(400).json({ message: "Account does not exist" });
+            return result.status(404).json({ message: "Account does not exist" });
 
         if (!await user.comparePassword(password))
             return result.status(400).json({ message: "Password is incorrect" });
@@ -78,6 +80,10 @@ router.delete("/delete", authorise, async (req, res) => {
             return res.status(400).json({ message: "User ID is required" });
         }
 
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
         const deletedUser = await User.findByIdAndDelete(id);
         if (!deletedUser)
             return res.status(404).json({ message: "User not found" });
@@ -95,6 +101,10 @@ router.put("/changePassword", authorise, async (req, res) => {
         if (!id || !oldPassword || !newPassword)
             return res.status(400).json({ message: "Missing required fields" });
 
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
         const user = await User.findById(id).select("+password");
         if (!user)
             return res.status(404).json({ message: "User not found" });
@@ -102,7 +112,7 @@ router.put("/changePassword", authorise, async (req, res) => {
 
         const isMatch = await user.comparePassword(oldPassword);
         if (!isMatch)
-            return res.status(401).json({ message: "Old password is incorrect" });
+            return res.status(400).json({ message: "Old password is incorrect" });
 
 
         user.password = newPassword;
@@ -113,8 +123,6 @@ router.put("/changePassword", authorise, async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 });
-
-
 
 router.post("/refreshToken", authorise, async (request, result) => {
     try {
@@ -127,8 +135,8 @@ router.post("/refreshToken", authorise, async (request, result) => {
 
         result.status(200).json({ token: newToken });
     } catch (error) {
-        result.status(500).json({ message: "Internal server error" })
+        result.status(500).json({ message: "Internal server error" });
     }
-})
+});
 
 module.exports = router;

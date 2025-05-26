@@ -42,7 +42,7 @@ const Login = () => {
             return;
         };
 
-        const hasLoggedIn = await login(loginDetails)
+        const hasLoggedIn = await login(loginDetails);
 
         if (hasLoggedIn?.message) {
             const err = { type: "form", message: hasLoggedIn.message }

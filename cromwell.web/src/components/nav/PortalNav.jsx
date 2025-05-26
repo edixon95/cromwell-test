@@ -40,7 +40,7 @@ const PortalNav = (props) => {
                 </Button>
 
                 <Button
-                    variant={"confirm"}
+                    variant={"inverse"}
                     onClick={handleLogout}
                 >
                     Logout
