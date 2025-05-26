@@ -17,7 +17,8 @@ const PasswordForm = (props) => {
                         value={props.formValue.oldPassword}
                         type="password"
                     />
-                    {parseError(props.errors, "oldPassword")}
+                    <span className="formError">{parseError(props.errors, "oldPassword")}</span>
+                    
                 </div>
 
                 <div>
@@ -28,7 +29,8 @@ const PasswordForm = (props) => {
                         value={props.formValue.newPassword}
                         type="password"
                     />
-                    {parseError(props.errors, "newPassword")}
+                    <span className="formError">{parseError(props.errors, "newPassword")}</span>
+                    
                 </div>
 
                 <div>
@@ -39,11 +41,13 @@ const PasswordForm = (props) => {
                         value={props.formValue.confirmPassword}
                         type="password"
                     />
-                    {parseError(props.errors, "confirmPassword")}
+                    <span className="formError">{parseError(props.errors, "confirmPassword")}</span>
+                    
                 </div>
             </div>
             <div className="buttonContainer">
-                {parseError(props.errors, "form")}
+                <span className="formError"> {parseError(props.errors, "form")}</span>
+               
                 <div className="buttonContainer buttonRow">
                     <Button
                         variant={"inverse"}

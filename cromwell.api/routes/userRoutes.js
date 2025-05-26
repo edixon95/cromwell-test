@@ -4,6 +4,7 @@ const User = require("../models/User");
 const checkAuth = require("../middleware/checkAuth");
 const createJWT = require("../util/createJWT");
 const mongoose = require("mongoose");
+const { NotFound, Exception, InternalServerError, Success } = require("../util/responses")
 
 router.post("/register", async (request, result) => {
     try {
@@ -13,13 +14,13 @@ router.post("/register", async (request, result) => {
         });
 
         if (existingUser) {
-            return result.status(400).json({ message: `Account with this ${existingUser.email === email ? "email" : "username"} already exists` });
+            return Exception(result, `Account with this ${existingUser.email === email ? "email" : "username"} already exists`);
         }
         const user = new User({ username, email, password });
         await user.save();
-        result.status(200).json({ message: "Success" });
+        Success(result);
     } catch (error) {
-        result.status(500).json({ message: "Internal server error" });
+        InternalServerError(result);
     };
 });
 
@@ -30,18 +31,17 @@ router.post("/login", async (request, result) => {
         const user = await User.findOne({ email }).select("+password");
 
         if (!user)
-            return result.status(404).json({ message: "Account does not exist" });
+            return NotFound(result, "Account");
 
         if (!await user.comparePassword(password))
-            return result.status(400).json({ message: "Password is incorrect" });
+            return Exception(result, "Password is incorrect");
 
         const token = createJWT(user);
 
         const { password: _, ...userWithoutPassword } = user.toObject();
-
-        result.status(200).json({ token, user: userWithoutPassword });
+        Success(result, { token, user: userWithoutPassword });
     } catch (error) {
-        result.status(500).json({ message: "Internal server error" });
+        InternalServerError(result);
     };
 });
 
@@ -49,9 +49,9 @@ router.get("/getAll", checkAuth, async (request, result) => {
     try {
         const users = await User.find({});
 
-        return result.status(200).json(users);
+        Success(result, users);
     } catch (error) {
-        result.status(500).json({ message: "Internal server error" })
+        InternalServerError(result);
     };
 });
 
@@ -60,67 +60,66 @@ router.get("/getSingle", checkAuth, async (request, result) => {
         const id = request.query.id;
 
         if (!id)
-            return result.status(400).json({ message: "ID required" });
+            return Exception(result, "ID required");
 
         const user = await User.findById(id);
         if (!user)
-            return result.status(404).json({ message: "User not found" });
+            return NotFound(result, "User");
 
-        result.status(200).json(user);
+        Success(result, user);
     } catch (error) {
-        result.status(500).json({ message: "Internal server error" })
+        InternalServerError(result);
     };
 });
 
-router.delete("/delete", checkAuth, async (req, res) => {
+router.delete("/delete", checkAuth, async (request, result) => {
     try {
-        const { id } = req.query;
+        const { id } = request.query;
 
-        if (!id) {
-            return res.status(400).json({ message: "User ID is required" });
-        }
+        if (!id)
+            return Exception(result, "User ID is required");
 
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            return res.status(404).json({ message: "User not found" });
-        }
+        if (!mongoose.Types.ObjectId.isValid(id))
+            return NotFound(result, "User");
+
 
         const deletedUser = await User.findByIdAndDelete(id);
         if (!deletedUser)
-            return res.status(404).json({ message: "User not found" });
+            return NotFound(result, "User");
 
-        res.status(200).json({ message: "User deleted successfully" });
+        Success(result);
     } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
+        InternalServerError(result);
     }
 });
 
-router.put("/changePassword", checkAuth, async (req, res) => {
+router.put("/changePassword", checkAuth, async (request, result) => {
     try {
-        const { id, oldPassword, newPassword } = req.body;
+        const { id, oldPassword, newPassword } = request.body;
 
         if (!id || !oldPassword || !newPassword)
-            return res.status(400).json({ message: "Missing required fields" });
+            return Exception(result, "Missing required fields");
 
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            return res.status(404).json({ message: "User not found" });
-        }
+        if (!mongoose.Types.ObjectId.isValid(id))
+            return NotFound(result, "User");
+
 
         const user = await User.findById(id).select("+password");
         if (!user)
-            return res.status(404).json({ message: "User not found" });
+            return NotFound(result, "User");
 
 
         const isMatch = await user.comparePassword(oldPassword);
         if (!isMatch)
-            return res.status(400).json({ message: "Old password is incorrect" });
+            return Exception(result, "Old password is incorrect");
 
 
         user.password = newPassword;
         await user.save();
 
-        res.status(200).json({ message: "Password updated successfully" });
+        Success(result);
     } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
+        InternalServerError(result);
     }
 });
 
@@ -129,13 +128,13 @@ router.post("/refreshToken", checkAuth, async (request, result) => {
         const user = await User.findById(request.user.id);
 
         if (!user)
-            return result.status(404).json({ message: "User not found" });
+            return NotFound(result, "User");
 
         const newToken = createJWT(user);
 
-        result.status(200).json({ token: newToken });
+        Success(result, { token: newToken });
     } catch (error) {
-        result.status(500).json({ message: "Internal server error" });
+        InternalServerError(result);
     }
 });
 

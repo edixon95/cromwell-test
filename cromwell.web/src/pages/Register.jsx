@@ -66,7 +66,7 @@ const Register = () => {
 
     return (
         <div id="homeContainer">
-            <Card height="80%">
+            <Card height="90%">
                 <div className="informationDiv">
                     <div className="imageContainer">
                         <div className="teamImage radiusLeft" />

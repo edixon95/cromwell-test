@@ -45,3 +45,7 @@
         width: 90%
     }
 }
+
+.formError {
+    font-size: 14px;
+}
