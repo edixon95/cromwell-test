@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
-const authorise = require("../middleware/authorise");
+const checkAuth = require("../middleware/checkAuth");
 const createJWT = require("../util/createJWT");
 const mongoose = require("mongoose");
 
@@ -45,7 +45,7 @@ router.post("/login", async (request, result) => {
     };
 });
 
-router.get("/getAll", authorise, async (request, result) => {
+router.get("/getAll", checkAuth, async (request, result) => {
     try {
         const users = await User.find({});
 
@@ -55,7 +55,7 @@ router.get("/getAll", authorise, async (request, result) => {
     };
 });
 
-router.get("/getSingle", authorise, async (request, result) => {
+router.get("/getSingle", checkAuth, async (request, result) => {
     try {
         const id = request.query.id;
 
@@ -72,7 +72,7 @@ router.get("/getSingle", authorise, async (request, result) => {
     };
 });
 
-router.delete("/delete", authorise, async (req, res) => {
+router.delete("/delete", checkAuth, async (req, res) => {
     try {
         const { id } = req.query;
 
@@ -94,7 +94,7 @@ router.delete("/delete", authorise, async (req, res) => {
     }
 });
 
-router.put("/changePassword", authorise, async (req, res) => {
+router.put("/changePassword", checkAuth, async (req, res) => {
     try {
         const { id, oldPassword, newPassword } = req.body;
 
@@ -124,7 +124,7 @@ router.put("/changePassword", authorise, async (req, res) => {
     }
 });
 
-router.post("/refreshToken", authorise, async (request, result) => {
+router.post("/refreshToken", checkAuth, async (request, result) => {
     try {
         const user = await User.findById(request.user.id);
 

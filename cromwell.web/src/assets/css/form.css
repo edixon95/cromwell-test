@@ -12,7 +12,7 @@
 .inputContainer {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 70%;
     flex-grow: 1;
     gap: 15px;
 }
@@ -37,4 +37,11 @@
 
 .signUpClick {
     cursor: pointer;
+}
+
+@media(max-width: 700px) {
+
+    .inputContainer {
+        width: 90%
+    }
 }
