@@ -15,7 +15,7 @@ Choose your operating system and follow the on screen instructions if not instal
 	- Navigate to cromwell.api/
 	- open the .env
 	- Find "MONGODB_URI=mongodb://localhost:27017/cromwell" and replace "mongodb://localhost:27017/cromwell" with your own mongoURI
-	- Make sure you have a table named "users"
+	- Create a table named "users" if you don't have one already
 
 3. Running the server
 	- Open cromwell.api in the terminal
