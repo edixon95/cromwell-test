@@ -33,7 +33,8 @@ router.post("/login", async (request, result) => {
         if (!user)
             return NotFound(result, "Account");
 
-        if (!await user.comparePassword(password))
+        const isMatch = await user.comparePassword(password);
+        if (!isMatch)
             return Exception(result, "Password is incorrect");
 
         const token = createJWT(user);
@@ -57,7 +58,7 @@ router.get("/getAll", checkAuth, async (request, result) => {
 
 router.get("/getSingle", checkAuth, async (request, result) => {
     try {
-        const id = request.query.id;
+        const { id } = request.query;
 
         if (!id)
             return Exception(result, "ID required");
@@ -79,7 +80,8 @@ router.delete("/delete", checkAuth, async (request, result) => {
         if (!id)
             return Exception(result, "User ID is required");
 
-        if (!mongoose.Types.ObjectId.isValid(id))
+        const isValidId = mongoose.Types.ObjectId.isValid(id)
+        if (!isValidId)
             return NotFound(result, "User");
 
 
@@ -100,7 +102,8 @@ router.put("/changePassword", checkAuth, async (request, result) => {
         if (!id || !oldPassword || !newPassword)
             return Exception(result, "Missing required fields");
 
-        if (!mongoose.Types.ObjectId.isValid(id))
+        const isValidId = mongoose.Types.ObjectId.isValid(id)
+        if (!isValidId)
             return NotFound(result, "User");
 
 
@@ -125,7 +128,8 @@ router.put("/changePassword", checkAuth, async (request, result) => {
 
 router.post("/refreshToken", checkAuth, async (request, result) => {
     try {
-        const user = await User.findById(request.user.id);
+        const { id } = request.user
+        const user = await User.findById(id);
 
         if (!user)
             return NotFound(result, "User");

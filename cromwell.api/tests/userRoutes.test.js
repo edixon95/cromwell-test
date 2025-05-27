@@ -13,7 +13,7 @@ afterAll(async () => {
     await mongoose.connection.close();
 });
 
-describe("Protected routes", () => {
+describe("Protected Routes", () => {
     const protectedRoutes = [
         { method: "get", url: "/user/getAll" },
         { method: "get", url: "/user/getSingle" },
@@ -132,7 +132,7 @@ describe("User Get", () => {
     });
 });
 
-describe("Change Password", () => {
+describe("User Change Password", () => {
     test("PUT /changePassword should require all fields", async () => {
         const res = await request(app)
             .put("/user/changePassword")
@@ -147,12 +147,12 @@ describe("Change Password", () => {
         expect(res.body.message).toBe("Missing required fields");
     });
 
-    test("PUT /changePassword should require a valid user (fail)", async () => {
+    test("PUT /changePassword should fail as user is not valid", async () => {
         const res = await request(app)
             .put("/user/changePassword")
             .set("Authorization", `Bearer ${token}`)
             .send({
-                id: "abc123",
+                id: "683463aa26e13d61d087ee94",
                 oldPassword: "!Password1",
                 newPassword: "!Password2"
             });
@@ -187,6 +187,17 @@ describe("Change Password", () => {
 
         expect(res.statusCode).toBe(200);
     });
+
+    test("POST /login should fail as password is now wrong", async () => {
+        const res = await request(app).post("/user/login")
+            .send({
+                email: "test@example.com",
+                password: "!Password1"
+            });
+
+        expect(res.status).toBe(400);
+        expect(res.body.message).toBe("Password is incorrect");
+    });
 });
 
 describe("User Auth", () => {
@@ -202,7 +213,7 @@ describe("User Auth", () => {
     });
 });
 
-describe("Delete User", () => {
+describe("User Delete", () => {
     test("DELETE /delete should require a userId", async () => {
         const res = await request(app)
             .delete(`/user/delete`)
